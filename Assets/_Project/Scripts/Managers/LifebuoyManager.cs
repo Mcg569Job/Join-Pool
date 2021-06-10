@@ -7,7 +7,7 @@ public class LifebuoyManager : MonoBehaviour
     public static LifebuoyManager Instance = null;
 
     private LifebuoyNode _firstLifebuoyNode, _currentLifebuoy = null;
-    private int _lifebuoyCount;
+    [HideInInspector]public int LifebuoyCount;
 
     private CameraFollow _camera;
 
@@ -25,12 +25,13 @@ public class LifebuoyManager : MonoBehaviour
     public void SetLifebuoyFirstNode(LifebuoyNode node)
     {
         _firstLifebuoyNode = node;
-        _lifebuoyCount = 1;
+        LifebuoyCount = 1;
     }
 
     public void ConnectLifebuoy(LifebuoyNode node)
     {
         if (!GameManager.Instance.IsGameStatNormal()) return;
+        if (coroutine != null) return;
 
         if (_currentLifebuoy == null)
         {
@@ -44,7 +45,7 @@ public class LifebuoyManager : MonoBehaviour
             _currentLifebuoy.Connect(node);
             _currentLifebuoy = node;
         }
-       
+
         AudioManager.Instance.PlaySound(AudioType.Connect);
         AudioManager.Instance.Vibrate();
 
@@ -68,19 +69,20 @@ public class LifebuoyManager : MonoBehaviour
             if (node.previousNode != null)
             {
                 _currentLifebuoy = node.previousNode;
+                _currentLifebuoy.nextNode = null;
                 _currentLifebuoy.DisableRope();
             }
 
-            bool exit = false;
-            while (exit == false)
+            while (temp != null)
             {
-
                 AudioManager.Instance.PlaySound(AudioType.Disconnect);
-                AudioManager.Instance.Vibrate() ;
+                AudioManager.Instance.Vibrate();
+
+                if (temp.isConnected)
+                    UpdateLifebuoyCount(-1);
 
                 temp.isConnected = false;
                 temp.transform.localScale *= 1.3f;
-                UpdateLifebuoyCount(-1);
 
                 yield return new WaitForSeconds(0.05f);
 
@@ -89,44 +91,30 @@ public class LifebuoyManager : MonoBehaviour
                 if (temp.nextNode != null)
                     temp = temp.nextNode;
                 else
-                    exit = true;
+                    temp = null;
 
             }
 
-            if (_currentLifebuoy != null)
-                _currentLifebuoy.nextNode = null;
+          
 
         }
         coroutine = null;
 
     }
 
-    /*  private void CalcCount()
-      {
-          LifebuoyNode tmp = _firstLifebuoyNode;
-          int c = 0;
-          while (tmp.nextNode!=null)
-          {
-              tmp = tmp.nextNode;
-              c++;
-          }
-          _lifebuoyCount = c;
-          print("calc " + c);
-      }
-    */
-    private void UpdateLifebuoyCount(int value)
+       private void UpdateLifebuoyCount(int value)
     {
-        _lifebuoyCount += value;
-        _camera.CalculateCameraPosition(_lifebuoyCount);
+        LifebuoyCount += value;
+        _camera.CalculateCameraPosition(LifebuoyCount);
 
-        UIManager.Instance.UpdateCountText(_lifebuoyCount);
+        UIManager.Instance.UpdateCountText(LifebuoyCount);
 
-        if (_lifebuoyCount <= 0)
+        if (LifebuoyCount <= 0)
         {
             GameManager.Instance.GameOver();
         }
 
-        //  Debug.Log("Lifebuoy count: " + _lifebuoyCount);
+        //  Debug.Log("Lifebuoy count: " + LifebuoyCount);
     }
 
     private IEnumerator ConnectAnimation()

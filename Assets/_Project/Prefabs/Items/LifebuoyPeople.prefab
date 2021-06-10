@@ -261,6 +261,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 1
+--- !u!114 &8010437062768108551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8646453446114113686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d9f5baed64c4c40b69114a25d561aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colors:
+  - serializedVersion: 2
+    rgba: 4294160436
+  - serializedVersion: 2
+    rgba: 4280680245
+  - serializedVersion: 2
+    rgba: 4282319103
+  - serializedVersion: 2
+    rgba: 4291297410
+  - serializedVersion: 2
+    rgba: 4278251775
 --- !u!1001 &3909529682774769090
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -387,11 +410,11 @@ PrefabInstance:
     - target: {fileID: 4096664758164499241, guid: f3c43e8b68742154d9b9b3990c55f7e6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b6ae547ae625cc444b709232666cf4dd, type: 2}
+      objectReference: {fileID: 2100000, guid: bd1453ee9a1ce1548ae16915ea23c484, type: 2}
     - target: {fileID: 4096664758164499241, guid: f3c43e8b68742154d9b9b3990c55f7e6, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: b6ae547ae625cc444b709232666cf4dd, type: 2}
+      objectReference: {fileID: 2100000, guid: 90fc71bc210aedc48a0885b16c7fb136, type: 2}
     - target: {fileID: 4252580455532711375, guid: f3c43e8b68742154d9b9b3990c55f7e6, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.8806958
@@ -529,6 +552,11 @@ PrefabInstance:
 --- !u!4 &3374567569043230594 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1771515384843907648, guid: f3c43e8b68742154d9b9b3990c55f7e6, type: 3}
+  m_PrefabInstance: {fileID: 3909529682774769090}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8646453446114113686 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4737557084188951892, guid: f3c43e8b68742154d9b9b3990c55f7e6, type: 3}
   m_PrefabInstance: {fileID: 3909529682774769090}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5544533978121371045

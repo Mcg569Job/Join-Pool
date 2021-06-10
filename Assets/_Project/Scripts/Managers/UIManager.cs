@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
         public Text coinTextOnMenu;
         public Text coinTextOnGame;
         public Text countText;
+        public Text coinTextOnWin;
     }
     #endregion
 
@@ -101,22 +102,10 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateWinTexts(int earnedCoins)
     {
-        //   uiTexts.coinTextOnWin.text = "0";
-        //  StartCoroutine(UpdateCoinText(earnedCoins));
+          uiTexts.coinTextOnWin.text = "0";
+          StartCoroutine(UpdateCoinTextEnum(earnedCoins));
     }
-    private IEnumerator UpdateCoinTextEnum(int amount)
-    {
-        yield return new WaitForSeconds(.6f);
-        int i = 0;
-        while (i < amount)
-        {
-            i += 5;
-            if (i > amount) i = amount;
-            //  uiTexts.coinTextOnWin.text = i.ToString();
-            yield return new WaitForSeconds(.05f);
-        }
-    }
-
+   
     #endregion
 
     #region Effects
@@ -140,7 +129,20 @@ public class UIManager : MonoBehaviour
 
         yield return new WaitForSeconds(.2f);
         earnedCoinText.gameObject.SetActive(false);
-
     }
+
+    private IEnumerator UpdateCoinTextEnum(int amount)
+    {
+        yield return new WaitForSeconds(.6f);
+        int i = 0;
+        while (i < amount)
+        {
+            i += 5;
+            if (i > amount) i = amount;
+              uiTexts.coinTextOnWin.text = "+"+ i.ToString();
+            yield return new WaitForSeconds(.08f);
+        }
+    }
+
     #endregion
 }

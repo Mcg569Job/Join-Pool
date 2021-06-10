@@ -8,7 +8,8 @@ public class LifebuoyNode : MonoBehaviour
     public LifebuoyNode nextNode;
 
     [SerializeField] public Transform connectionPoint;
-    [HideInInspector] public bool isConnected = false;
+    //[HideInInspector]
+    public bool isConnected = false;
 
     private Rigidbody _rigidbody;
 
@@ -36,13 +37,12 @@ public class LifebuoyNode : MonoBehaviour
         nextNode.transform.position = connectionPoint.position;
         node.ResetVelocity();
         EnableRope();
+        node.isConnected = true;
         isConnected = true;
     }
 
     private void FixedUpdate()
     {
-      
-
         if (previousNode != null)
         {
             transform.localPosition = Vector3.Lerp(transform.position, previousNode.connectionPoint.position, Time.deltaTime * 4f);
@@ -50,7 +50,7 @@ public class LifebuoyNode : MonoBehaviour
         }
 
         DrawRope();
-  if (!GameManager.Instance.IsGameStatNormal()) return;
+        if (!GameManager.Instance.IsGameStatNormal()) return;
 
         if (nextNode != null)
         {

@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     {
         GameStatus = GameStatus.Finish;
         UIManager.Instance.ActivateWinPanel(true);
+        UIManager.Instance.UpdateWinTexts(LifebuoyManager.Instance.LifebuoyCount * 10);
         AudioManager.Instance.PlaySound(AudioType.Win);
     }
     public void GameOver()
