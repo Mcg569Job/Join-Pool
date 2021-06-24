@@ -25,6 +25,7 @@ public class LifebuoyManager : MonoBehaviour
     public void SetLifebuoyFirstNode(LifebuoyNode node)
     {
         _firstLifebuoyNode = node;
+        _firstLifebuoyNode.isConnected = true;
         LifebuoyCount = 1;
     }
 

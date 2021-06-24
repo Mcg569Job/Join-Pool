@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
         GameStatus = GameStatus.Normal;
         UIManager.Instance.ActivateMenuPanel(false);
         UIManager.Instance.ActivateGamePanel(true);
+        TinySauce.OnGameStarted(levelNumber: LevelManager.Instance.currentLevel.ToString());
     }
     public void FinishGame()
     {
@@ -40,12 +41,14 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.ActivateWinPanel(true);
         UIManager.Instance.UpdateWinTexts(LifebuoyManager.Instance.LifebuoyCount * 10);
         AudioManager.Instance.PlaySound(AudioType.Win);
+        TinySauce.OnGameFinished(true, levelNumber: LevelManager.Instance.currentLevel.ToString(), score: LifebuoyManager.Instance.LifebuoyCount);
     }
     public void GameOver()
     {
         GameStatus = GameStatus.GameOver;
         UIManager.Instance.ActivateGameOverPanel(true);
         AudioManager.Instance.PlaySound(AudioType.GameOver);
+        TinySauce.OnGameFinished(false, levelNumber: LevelManager.Instance.currentLevel.ToString(), score: LifebuoyManager.Instance.LifebuoyCount);
     }
 
     #endregion
